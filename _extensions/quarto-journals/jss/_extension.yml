@@ -26,4 +26,6 @@ contributes:
           "partials/_print-address.tex",
           "partials/_print-author.tex",
         ]
-    html: default
+    html:
+      number-sections: true
+      toc: true

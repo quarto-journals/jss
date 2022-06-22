@@ -1,7 +1,9 @@
 ---
 title: "A Short Demo Article: Regression Models for Count Data in R"
 format:
-    jss-pdf: default
+    jss-pdf:
+        keep-tex: true  
+    jss-html: default
 author:
   - name: Achim Zeileis
     affiliations:
@@ -28,8 +30,7 @@ abstract: |
 
 keywords: [JSS, style guide, comma-separated, not capitalized, "\\proglang{R}"]
 keywords-plain: [JSS, style guide, comma-separated, not capitalized, R]
-bibliography: bibliography.bib
-keep-tex: true      
+bibliography: bibliography.bib  
 ---
 
 ## Introduction: Count data regression in R {#sec-intro}
