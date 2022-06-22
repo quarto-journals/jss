@@ -1,0 +1,29 @@
+title: JSS Journal Format
+author: Charles Teague
+version: 0.1.0
+contributes:
+  format:
+    common:
+      filters:
+        - filter.lua
+      shortcodes:
+        - shortcodes.lua
+    pdf:
+      shift-heading-level-by: -1
+      tbl-cap-location: bottom
+      highlight-style: none
+      header-includes: |
+        \usepackage{orcidlink,thumbpdf,lmodern}
+
+        \newcommand{\class}[1]{`\code{#1}'}
+        \newcommand{\fct}[1]{\code{#1()}}
+
+      template-partials:
+        [
+          "partials/doc-class.tex",
+          "partials/title.tex",
+          "partials/before-body.tex",
+          "partials/_print-address.tex",
+          "partials/_print-author.tex",
+        ]
+    html: default
