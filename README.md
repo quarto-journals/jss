@@ -1,4 +1,4 @@
-# Quarto Template (and extension) - Journal of Statistical Software
+# Quarto Extension - Journal of Statistical Software
 
 ## Using the Template
 If you'd like, you can use this as a template to create an article for the Journal of Statistical Software. To do this, use the following command:
