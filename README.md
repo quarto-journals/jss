@@ -36,4 +36,4 @@ format:
     keep-tex: true    
 ```
 
-Learn more at [https://www.jstatsoft.org]
+Learn more at [https://www.jstatsoft.org](https://www.jstatsoft.org)
