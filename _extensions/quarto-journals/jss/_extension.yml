@@ -1,4 +1,4 @@
-title: JSS Journal Format
+title: Journal of Statistical Software Format
 author: Charles Teague
 version: 0.1.0
 contributes:
@@ -17,15 +17,14 @@ contributes:
 
         \newcommand{\class}[1]{`\code{#1}'}
         \newcommand{\fct}[1]{\code{#1()}}
-
+      fig-width: 4.9 # 6.125" * 0.8, as in template
+      fig-height: 3.675 # 4.9 * 3:4
       template-partials:
-        [
-          "partials/doc-class.tex",
-          "partials/title.tex",
-          "partials/before-body.tex",
-          "partials/_print-address.tex",
-          "partials/_print-author.tex",
-        ]
+        - "partials/doc-class.tex"
+        - "partials/title.tex"
+        - "partials/before-body.tex"
+        - "partials/_print-address.tex"
+        - "partials/_print-author.tex"
     html:
       number-sections: true
       toc: true
