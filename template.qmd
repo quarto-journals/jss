@@ -36,7 +36,7 @@ bibliography: bibliography.bib
 ## Introduction: Count data regression in R {#sec-intro}
 
 ::: callout
-The introduction is in principle "as usual". However, it should usually embed both the implemented *methods* and the *software* into the respective relevant literature. For the latter both competing and complementary software should be discussed (within the same software environment and beyond), bringing out relative (dis)advantages. All software mentioned should be properly `@cited`'d. (See also @sec-bibtex for more details on {{< bibtex >}}.)
+The introduction is in principle "as usual". However, it should usually embed both the implemented *methods* and the *software* into the respective relevant literature. For the latter both competing and complementary software should be discussed (within the same software environment and beyond), bringing out relative (dis)advantages. All software mentioned should be properly `@cited`'d. (See also [Using BibTeX] for more details on {{< bibtex >}}.)
 
 For writing about software JSS requires authors to use the markup `[]{.proglang}` (programming languages and large programmable systems), `[]{.pkg}` (software packages), back ticks like \`code\` for code (functions, commands, arguments, etc.).
 
@@ -189,7 +189,7 @@ information such as relative contributions of the authors may be added here
 
 :::
 
-## References
+## References {.unnumbered}
 
 :::{#refs}
 
@@ -197,7 +197,7 @@ information such as relative contributions of the authors may be added here
 
 {{< pagebreak >}}
 
-## More technical details {#sec-techdetails}
+## More technical details {#sec-techdetails .unnumbered}
 
 :::{.callout}
 
@@ -218,7 +218,7 @@ which includes the following topics:
 
 :::
 
-## Using BibTeX {#sec-bibtex}
+## Using BibTeX {#sec-bibtex .unnumbered}
 
 :::{.callout}
 
