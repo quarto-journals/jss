@@ -11,3 +11,5 @@ In order to fix the above, we will need Quarto to either expose table options or
 - `short-title.lua` does this for rticles, but generating the sections results in Quarto cross referencing being evaded (because we transform the headings into raw tex)
 - will likely need Quarto to add suppot for this.
 
+### Authors
+- We're currently outputing authors without addresses / affiliations in the bottom section
