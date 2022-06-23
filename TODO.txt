@@ -2,9 +2,6 @@
 tables need to be placed at the top of the page
 table caption location should be bottom
 CodeInput/CodeChunk environment?
-Code prompt set to R>
-code prompt set on globally
-
 
 
 Notes:

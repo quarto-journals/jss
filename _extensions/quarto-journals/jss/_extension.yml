@@ -8,6 +8,11 @@ contributes:
         - filter.lua
       shortcodes:
         - shortcodes.lua
+      knitr:
+        opts_chunk:
+          R.options:
+            prompt: "R> "
+            continue: "+"
     pdf:
       shift-heading-level-by: -1
       tbl-cap-location: bottom
