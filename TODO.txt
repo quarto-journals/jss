@@ -1,8 +1,14 @@
-callouts vs leftbar environment
-` ` for code inlines ok?
+` ` for code inlines ok vs \code{}
 tables need to be placed at the top of the page
 table caption location should be bottom
 CodeInput/CodeChunk environment?
 Code prompt set to R>
 code prompt set on globally
-two authors incorrectly wrapping
+
+
+
+Notes:
+- short-title.lua
+    plain text titles for sections
+- Introduce lua like
+    quarto.authors.setMetadata(author)

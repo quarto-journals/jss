@@ -26,9 +26,9 @@ abstract: |
   Generally, we ask to follow JSS's style guide and FAQs precisely. Also,
   it is recommended to keep the {{< latex >}} code as simple as possible,
   i.e., avoid inclusion of packages/commands that are not necessary.
-  For outlining the typical structure of a JSS article some brief text snippets are employed that have been inspired by @ZeileisKleiberJackman2008, discussing count data regression in \proglang{R}. Editorial comments and instructions are marked by vertical bars.
+  For outlining the typical structure of a JSS article some brief text snippets are employed that have been inspired by @ZeileisKleiberJackman2008, discussing count data regression in [R]{.proglang}. Editorial comments and instructions are marked by vertical bars.
 
-keywords: [JSS, style guide, comma-separated, not capitalized, "\\proglang{R}"]
+keywords: [JSS, style guide, comma-separated, not capitalized, "[R]{.proglang}"]
 keywords-plain: [JSS, style guide, comma-separated, not capitalized, R]
 bibliography: bibliography.bib  
 ---

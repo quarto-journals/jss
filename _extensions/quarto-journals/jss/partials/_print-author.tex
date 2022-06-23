@@ -1,1 +1,1 @@
-$it.name.literal$$if(it.orcid)$~\orcidlink{$it.orcid$}$endif$$for(it.affiliations/first)$\\$it.name$$endfor$
+$if(it.metadata.latex-prefix)$ $it.metadata.latex-prefix$ $endif$$it.name.literal$$if(it.orcid)$~\orcidlink{$it.orcid$}$endif$$for(it.affiliations/first)$\\$it.name$$endfor$

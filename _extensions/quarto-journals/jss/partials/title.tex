@@ -1,10 +1,8 @@
 %% -- Article metainformation (author, title, ...) -----------------------------
 
 %% Author information
-\author{$for(by-author/first)$$_print-author.tex()$$endfor$%
-$for(by-author/rest/allbutlast)$\And $_print-author.tex()$$endfor$%
-$if(by-author/allbutlast)$$for(by-author/last)$\AND $_print-author.tex()$$endfor$$endif$}
-\Plainauthor{Matthias Templ, Second Author} %% comma-separated
+\author{$for(by-author)$$_print-author.tex()$$endfor$}
+\Plainauthor{$for(by-author)$$it.name.literal$$endfor$} %% comma-separated
 
 \title{$title$}
 $if(title-plain)$
