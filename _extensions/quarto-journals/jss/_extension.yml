@@ -1,6 +1,6 @@
 title: Journal of Statistical Software Format
 author: Charles Teague
-version: 0.1.0
+version: 0.9.0
 contributes:
   format:
     common:
