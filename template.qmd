@@ -49,7 +49,7 @@ In [R]{.proglang} @R, GLMs are provided by the model fitting functions [glm]{.fc
 
 ## Models and software {#sec-models}
 
-The basic Poisson regression model for count data is a special case of the GLM framework @McCullaghNelder1989. It describes the dependence of a count response variable $y_i$ ($i = 1, \dots, n$) by assuming a Poisson distribution $y_i \sim \mathrm{Pois}(\mu_i)$. The dependence of the conditional mean $\E[y_i \, | \, x_i] = \mu_i$ on the regressors $x_i$ is then specified via a log link and a linear predictor
+The basic Poisson regression model for count data is a special case of the GLM framework @McCullaghNelder1989. It describes the dependence of a count response variable $y_i$ ($i = 1, \dots, n$) by assuming a Poisson distribution $y_i \sim \mathrm{Pois}(\mu_i)$. The dependence of the conditional mean $E[y_i \, | \, x_i] = \mu_i$ on the regressors $x_i$ is then specified via a log link and a linear predictor
 
 $$
 \log(\mu_i) \quad = \quad x_i^\top \beta,
