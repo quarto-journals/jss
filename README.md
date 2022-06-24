@@ -1,4 +1,6 @@
-# Quarto Extension - Journal of Statistical Software
+# Format - Journal of Statistical Software
+
+This Quarto format will help you create documents for the Journal of Statistical Software. To learn more about the Journal of Statistical Software, see [https://www.jstatsoft.org](https://www.jstatsoft.org). For more about Quarto and how to use format extensions, see [https://www.quarto.org](https://www.quarto.org).
 
 ## Using the Template
 If you'd like, you can use this as a template to create an article for the Journal of Statistical Software. To do this, use the following command:
@@ -35,5 +37,3 @@ format:
   jss-pdf:
     keep-tex: true    
 ```
-
-Learn more at [https://www.jstatsoft.org](https://www.jstatsoft.org)
