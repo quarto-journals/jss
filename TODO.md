@@ -17,6 +17,3 @@ In order to fix the above, we will need Quarto to either expose table options or
 
 ### Appendixes
 - We're not properly numbering the appendixes (e.g. should have letters/be proper appendix rather than being unnumbered)
-
-### Bibliography
-- Confirm that we are properly using the bst file (formatting of bibliography appears incorrect)
