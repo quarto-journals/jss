@@ -31,6 +31,8 @@ contributes:
         - "partials/before-body.tex"
         - "partials/_print-address.tex"
         - "partials/_print-author.tex"
+      cite-method: natbib
+      biblio-config: false
     html:
       number-sections: true
       toc: true
