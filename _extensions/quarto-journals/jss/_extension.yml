@@ -17,11 +17,12 @@ contributes:
       shift-heading-level-by: -1
       tbl-cap-location: bottom
       highlight-style: none
-      header-includes: |
-        \usepackage{orcidlink,thumbpdf,lmodern}
+      include-in-header:
+        text: |
+          \usepackage{orcidlink,thumbpdf,lmodern}
 
-        \newcommand{\class}[1]{`\code{#1}'}
-        \newcommand{\fct}[1]{\code{#1()}}
+          \newcommand{\class}[1]{`\code{#1}'}
+          \newcommand{\fct}[1]{\code{#1()}}
       fig-width: 4.9 # 6.125" * 0.8, as in template
       fig-height: 3.675 # 4.9 * 3:4
       template-partials:
