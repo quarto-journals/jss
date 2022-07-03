@@ -33,6 +33,10 @@ contributes:
         - "partials/_print-author.tex"
       cite-method: natbib
       biblio-config: false
+      format-resources:
+        - jss.bst
+        - jss.cls
+        - jsslogo.jpg
     html:
       number-sections: true
       toc: true

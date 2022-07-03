@@ -2,7 +2,7 @@
 
 -- these classes, when placed on a span will be replaced
  -- with an identical LaTeX command for PDF output
-local texMappings = {
+ local texMappings = {
   "proglang",
   "pkg",
   "fct",
@@ -31,16 +31,18 @@ return {
       -- this computes the proper prefix and places it in the author metadata
       -- for use by the template
       local byAuthor = meta['by-author']
-      for i, author in ipairs(byAuthor) do
-        local prefix = {pandoc.RawInline("tex ","")};
-        if i > 1 and i % 2 == 1 then
-          prefix = {pandoc.RawInline("tex", "\\AND")}
-        elseif i > 1 then
-          prefix = {pandoc.RawInline("tex", "\\And")}
+      if byAuthor ~= nil then
+        for i, author in ipairs(byAuthor) do
+          local prefix = {pandoc.RawInline("tex ","")};
+          if i > 1 and i % 2 == 1 then
+            prefix = {pandoc.RawInline("tex", "\\AND")}
+          elseif i > 1 then
+            prefix = {pandoc.RawInline("tex", "\\And")}
+          end
+          author['metadata']['latex-prefix'] = prefix
         end
-        author['metadata']['latex-prefix'] = prefix
+        return meta
       end
-      return meta
     end
   }
 }
