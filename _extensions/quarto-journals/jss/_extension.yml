@@ -7,7 +7,7 @@ contributes:
       filters:
         - filter.lua
       shortcodes:
-        - shortcodes.lua
+        - quarto-ext/fancy-text
       knitr:
         opts_chunk:
           R.options:

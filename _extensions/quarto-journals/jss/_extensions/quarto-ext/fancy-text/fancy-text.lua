@@ -1,5 +1,3 @@
-
-
 -- shortcode that provides a nicely formatted 'LaTeX' string
 function latex()
   if quarto.doc.isFormat("pdf") then
@@ -10,7 +8,7 @@ function latex()
     return pandoc.Span('LaTeX')
   end
 end
-
+  
 -- shortcode that provides a nicely formatted 'bibtex' string
 function bibtex()
   if quarto.doc.isFormat("pdf") then
