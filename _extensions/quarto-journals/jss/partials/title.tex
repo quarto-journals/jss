@@ -18,11 +18,11 @@ $if(abstract)$
 $endif$
 
 %% at least one keyword must be supplied
-$if(keywords)$
-\Keywords{$for(keywords/first)$$it$$endfor$$for(keywords/rest)$, $it$$endfor$}
+$if(keywords-formatted)$
+\Keywords{$for(keywords-formatted/first)$$it$$endfor$$for(keywords-formatted/rest)$, $it$$endfor$}
 $endif$
-$if(keywords-plain)$
-\Plainkeywords{$for(keywords-plain/first)$$it$$endfor$$for(keywords-plain/rest)$, $it$$endfor$}
+$if(keywords)$
+\Plainkeywords{$for(keywords/first)$$it$$endfor$$for(keywords/rest)$, $it$$endfor$}
 $endif$
 
 %% publication information
