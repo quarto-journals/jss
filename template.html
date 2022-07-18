@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-99.9.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Achim Zeileis">
+<meta name="author" content="Second Author">
+<meta name="keywords" content="JSS, style guide, comma-separated, not capitalized, R">
+
+<title>A Short Demo Article: Regression Models for Count Data in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="template_files/libs/clipboard/clipboard.min.js"></script>
+<script src="template_files/libs/quarto-html/quarto.js"></script>
+<script src="template_files/libs/quarto-html/popper.min.js"></script>
+<script src="template_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="template_files/libs/quarto-html/anchor.min.js"></script>
+<link href="template_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="template_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="template_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="template_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="template_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link active" data-scroll-target="#sec-intro"> <span class="header-section-number">1</span> Introduction: Count data regression in R</a></li>
+  <li><a href="#sec-models" id="toc-sec-models" class="nav-link" data-scroll-target="#sec-models"> <span class="header-section-number">2</span> Models and software</a></li>
+  <li><a href="#sec-illustrations" id="toc-sec-illustrations" class="nav-link" data-scroll-target="#sec-illustrations"> <span class="header-section-number">3</span> Illustrations</a></li>
+  <li><a href="#sec-summary" id="toc-sec-summary" class="nav-link" data-scroll-target="#sec-summary"> <span class="header-section-number">4</span> Summary and discussion</a></li>
+  <li><a href="#computational-details" id="toc-computational-details" class="nav-link" data-scroll-target="#computational-details">Computational details</a></li>
+  <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#sec-techdetails" id="toc-sec-techdetails" class="nav-link" data-scroll-target="#sec-techdetails">More technical details</a></li>
+  <li><a href="#sec-bibtex" id="toc-sec-bibtex" class="nav-link" data-scroll-target="#sec-bibtex">Using BibTeX</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A Short Demo Article: Regression Models for Count Data in R</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <a href="https://www.zeileis.org/">Achim Zeileis</a> <a href="https://orcid.org/0000-0003-0918-3766" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Universität Innsbruck
+          </p>
+        <p class="affiliation">
+            Journal of Statistical Software
+          </p>
+      </div>
+      <div class="quarto-title-meta-contents">
+    Second Author 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Plus Affiliation
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    <p>This short article illustrates how to write a manuscript for the <em>Journal of Statistical Software</em> (JSS) using its <span class="math inline">\(\LaTeX\)</span> style files. Generally, we ask to follow JSS’s style guide and FAQs precisely. Also, it is recommended to keep the <span class="math inline">\(\LaTeX\)</span> code as simple as possible, i.e., avoid inclusion of packages/commands that are not necessary. For outlining the typical structure of a JSS article some brief text snippets are employed that have been inspired by <span class="citation" data-cites="ZeileisKleiberJackman2008">Zeileis, Kleiber, and Jackman (<a href="#ref-ZeileisKleiberJackman2008" role="doc-biblioref">2008</a>)</span>, discussing count data regression in <code>R</code>. Editorial comments and instructions are marked by vertical bars.</p>
+  </div>
+</div>
+
+</header>
+
+<section id="sec-intro" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="sec-intro"><span class="header-section-number">1</span> Introduction: Count data regression in R</h2>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The introduction is in principle “as usual”. However, it should usually embed both the implemented <em>methods</em> and the <em>software</em> into the respective relevant literature. For the latter both competing and complementary software should be discussed (within the same software environment and beyond), bringing out relative (dis)advantages. All software mentioned should be properly <code>@cited</code>’d.&nbsp;(See also <a href="#sec-bibtex">Using BibTeX</a> for more details on <span style="font-variant: small-caps;">Bib</span><span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X.)</p>
+<p>For writing about software JSS requires authors to use the markup <code>[]{.proglang}</code> (programming languages and large programmable systems), <code>[]{.pkg}</code> (software packages), back ticks like `code` for code (functions, commands, arguments, etc.).</p>
+<p>If there is such markup in (sub)section titles (as above), a plain text version has to be provided in the <span class="math inline">\(\LaTeX\)</span> command as well. Below we also illustrate how abbrevations should be introduced and citation commands can be employed. See the <span class="math inline">\(\LaTeX\)</span> code for more details.</p>
+</div>
+</div>
+</div>
+<p>Modeling count variables is a common task in economics and the social sciences. The classical Poisson regression model for count data is often of limited use in these disciplines because empirical count data sets typically exhibit overdispersion and/or an excess number of zeros. The former issue can be addressed by extending the plain Poisson regression model in various directions: e.g., using sandwich covariances or estimating an additional dispersion parameter (in a so-called quasi-Poisson model). Another more formal way is to use a negative binomial (NB) regression. All of these models belong to the family of generalized linear models (GLMs). However, although these models typically can capture overdispersion rather well, they are in many applications not sufficient for modeling excess zeros. Since <span class="citation" data-cites="Mullahy1986">Mullahy (<a href="#ref-Mullahy1986" role="doc-biblioref">1986</a>)</span> there is increased interest in zero-augmented models that address this issue by a second model component capturing zero counts. An overview of count data models in econometrics, including hurdle and zero-inflated models, is provided in <span class="citation" data-cites="CameronTrivedi2013">Cameron and Trivedi (<a href="#ref-CameronTrivedi2013" role="doc-biblioref">2013</a>)</span>.</p>
+<p>In <code>R</code> <span class="citation" data-cites="R"> Core Team (<a href="#ref-R" role="doc-biblioref">2017</a>)</span>, GLMs are provided by the model fitting functions <code>glm</code> in the <code>stats</code> package and <code>glm.nb</code> in the <code>MASS</code> package <span class="citation" data-cites="VenablesRipley2002">(<a href="#ref-VenablesRipley2002" role="doc-biblioref">Venables and Ripley 2002</a>)</span> along with associated methods for diagnostics and inference. The manuscript that this document is based on <span class="citation" data-cites="ZeileisKleiberJackman2008">(<a href="#ref-ZeileisKleiberJackman2008" role="doc-biblioref">Zeileis, Kleiber, and Jackman 2008</a>)</span> then introduced hurdle and zero-inflated count models in the functions <code>hurdle</code> and <code>zeroinfl</code> in the <code>pcsl</code> package <span class="citation" data-cites="Jackman2015">Jackman (<a href="#ref-Jackman2015" role="doc-biblioref">2015</a>)</span>. Of course, much more software could be discussed here, including (but not limited to) generalized additive models for count data as available in the <code>R</code> packages <code>mgcv</code> <span class="citation" data-cites="Wood2006">Wood (<a href="#ref-Wood2006" role="doc-biblioref">2006</a>)</span>, <code>gamlss</code> <span class="citation" data-cites="StasinopoulosRigby2007">Stasinopoulos and Rigby (<a href="#ref-StasinopoulosRigby2007" role="doc-biblioref">2007</a>)</span>, or <code>VGAM</code> <span class="citation" data-cites="Yee2009">Yee (<a href="#ref-Yee2009" role="doc-biblioref">2010</a>)</span>.</p>
+</section>
+<section id="sec-models" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sec-models"><span class="header-section-number">2</span> Models and software</h2>
+<p>The basic Poisson regression model for count data is a special case of the GLM framework <span class="citation" data-cites="McCullaghNelder1989">McCullagh and Nelder (<a href="#ref-McCullaghNelder1989" role="doc-biblioref">1989</a>)</span>. It describes the dependence of a count response variable <span class="math inline">\(y_i\)</span> (<span class="math inline">\(i = 1, \dots, n\)</span>) by assuming a Poisson distribution <span class="math inline">\(y_i \sim \mathrm{Pois}(\mu_i)\)</span>. The dependence of the conditional mean <span class="math inline">\(E[y_i \, | \, x_i] = \mu_i\)</span> on the regressors <span class="math inline">\(x_i\)</span> is then specified via a log link and a linear predictor</p>
+<p><span id="eq-mean"><span class="math display">\[
+\log(\mu_i) \quad = \quad x_i^\top \beta,
+\tag{1}\]</span></span></p>
+<p>where the regression coefficients <span class="math inline">\(\beta\)</span> are estimated by maximum likelihood (ML) using the iterative weighted least squares (IWLS) algorithm.</p>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>TODO: Note that around the equation above there should be no spaces (avoided in the <span class="math inline">\(\LaTeX\)</span> code by <code>%</code> lines) so that “normal” spacing is used and not a new paragraph started.</p>
+</div>
+</div>
+</div>
+<p><code>R</code> provides a very flexible implementation of the general GLM framework in the function <code>glm</code> <span class="citation" data-cites="ChambersHastie1992">Chambers and Hastie (<a href="#ref-ChambersHastie1992" role="doc-biblioref">1992</a>)</span> in the <code>stats</code> package. Its most important arguments are</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(formula, data, subset, na.action, weights, offset,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> gaussian, <span class="at">start =</span> <span class="cn">NULL</span>, <span class="at">control =</span> <span class="fu">glm.control</span>(…),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="cn">TRUE</span>, <span class="at">y =</span> <span class="cn">TRUE</span>, <span class="at">x =</span> <span class="cn">FALSE</span>, …)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where <code>formula</code> plus <code>data</code> is the now standard way of specifying regression relationships in <code>R</code>/<code>S</code> introduced in <span class="citation" data-cites="ChambersHastie1992">Chambers and Hastie (<a href="#ref-ChambersHastie1992" role="doc-biblioref">1992</a>)</span>. The remaining arguments in the first line (<code>subset</code>, <code>na.action</code>, <code>weights</code>, and <code>offset</code>) are also standard for setting up formula-based regression models in <code>R</code>/<code>S</code>. The arguments in the second line control aspects specific to GLMs while the arguments in the last line specify which components are returned in the fitted model object (of class <code>glm</code> which inherits from <code>lm</code>). For further arguments to <code>glm</code> (including alternative specifications of starting values) see <code>?glm</code>. For estimating a Poisson model <code>family = poisson</code> has to be specified.</p>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>As the synopsis above is a code listing that is not meant to be executed, one can use either the dedicated <code>{Code}</code> environment or a simple <code>{verbatim}</code> environment for this. Again, spaces before and after should be avoided.</p>
+<p>Finally, there might be a reference to a <code>{table}</code> such as <a href="#tbl-overview">Table&nbsp;1</a>. Usually, these are placed at the top of the page (<code>[t!]</code>), centered (<code>\centering</code>), with a caption below the table, column headers and captions in sentence style, and if possible avoiding vertical lines.</p>
+</div>
+</div>
+</div>
+<div id="tbl-overview" class="anchored">
+<table class="table">
+<caption>Table 1: Overview of various count regression models. The table is usually placed at the top of the page (<code>[t!]</code>), centered (<code>centering</code>), has a caption below the table, column headers and captions are in sentence style, and if possible vertical lines should be avoided.</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Distribution</th>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GLM</td>
+<td>Poisson</td>
+<td>ML</td>
+<td>Poisson regression: classical GLM, estimated by maximum likelihood (ML)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Quasi</td>
+<td>“Quasi-Poisson regression’’: same mean function, estimated by quasi-ML (QML) or equivalently generalized estimating equations (GEE), inference adjustment via estimated dispersion parameter</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>Adjusted</td>
+<td>“Adjusted Poisson regression’’: same mean function, estimated by QML/GEE, inference adjustment via sandwich covariances</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>NB</td>
+<td>ML</td>
+<td>NB regression: extended GLM, estimated by ML including additional shape parameter</td>
+</tr>
+<tr class="odd">
+<td>Zero-augmented</td>
+<td>Poisson</td>
+<td>ML</td>
+<td>Zero-inflated Poisson (ZIP), hurdle Poisson</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>NB</td>
+<td>ML</td>
+<td>Zero-inflated NB (ZINB), hurdle NB</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="sec-illustrations" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sec-illustrations"><span class="header-section-number">3</span> Illustrations</h2>
+<p>For a simple illustration of basic Poisson and NB count regression the <code>quine</code> data from the <code>MASS</code> package is used. This provides the number of <code>Days</code> that children were absent from school in Australia in a particular year, along with several covariates that can be employed as regressors. The data can be loaded by</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>R<span class="sc">&gt;</span> <span class="fu">data</span>(<span class="st">"quine"</span>, <span class="at">package =</span> <span class="st">"MASS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and a basic frequency distribution of the response variable is displayed in <a href="#fig-quine">Figure&nbsp;1</a>.</p>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>For code input and output, the style files provide dedicated environments. Either the “agnostic” <code>{CodeInput}</code> and <code>{CodeOutput}</code> can be used or, equivalently, the environments <code>{Sinput}</code> and <code>{Soutput}</code> as produced by <code>Sweave</code> or <code>knitr</code> when using the <code>render_sweave()</code> hook. Please make sure that all code is properly spaced, e.g., using <code>y = a + b * x</code> and <em>not</em> <code>y=a+b*x</code>. Moreover, code input should use “the usual” command prompt in the respective software system. For <code>R</code> code, the prompt <code>R&gt;</code> should be used with <code>+</code> as the continuation prompt. Generally, comments within the code chunks should be avoided – and made in the regular <span class="math inline">\(\LaTeX\)</span> text instead. Finally, empty lines before and after code input/output should be avoided (see above).</p>
+</div>
+</div>
+</div>
+<div id="fig-quine" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><embed src="article-visualization.pdf" class="img-fluid"></p>
+<p></p><figcaption class="figure-caption">Figure 1: Frequency distribution for number of days absent from school.</figcaption><p></p>
+</figure>
+</div>
+<p>As a first model for the <code>quine</code> data, we fit the basic Poisson regression model. (Note that JSS prefers when the second line of code is indented by two spaces.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R<span class="sc">&gt;</span> m_pois <span class="ot">&lt;-</span> <span class="fu">glm</span>(Days <span class="sc">~</span> (Eth <span class="sc">+</span> Sex <span class="sc">+</span> Age <span class="sc">+</span> Lrn)<span class="sc">^</span><span class="dv">2</span>, <span class="at">data =</span> quine, <span class="at">family =</span> poisson)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To account for potential overdispersion we also consider a negative binomial GLM.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>R<span class="sc">&gt;</span> <span class="fu">library</span>(<span class="st">"MASS"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>R<span class="sc">&gt;</span> m_nbin <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(Days <span class="sc">~</span> (Eth <span class="sc">+</span> Sex <span class="sc">+</span> Age <span class="sc">+</span> Lrn)<span class="sc">^</span><span class="dv">2</span>, <span class="at">data =</span> quine)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In a comparison with the BIC the latter model is clearly preferred.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>R<span class="sc">&gt;</span> <span class="fu">library</span>(<span class="st">"MASS"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>R<span class="sc">&gt;</span> <span class="fu">BIC</span>(m_pois, m_nbin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df      BIC
+m_pois 18 2046.851
+m_nbin 19 1157.235</code></pre>
+</div>
+</div>
+<p>Hence, the full summary of that model is shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>R<span class="sc">&gt;</span> <span class="fu">summary</span>(m_nbin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm.nb(formula = Days ~ (Eth + Sex + Age + Lrn)^2, data = quine, 
+    init.theta = 1.60364105, link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.0857  -0.8306  -0.2620   0.4282   2.0898  
+
+Coefficients: (1 not defined because of singularities)
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  3.00155    0.33709   8.904  &lt; 2e-16 ***
+EthN        -0.24591    0.39135  -0.628  0.52977    
+SexM        -0.77181    0.38021  -2.030  0.04236 *  
+AgeF1       -0.02546    0.41615  -0.061  0.95121    
+AgeF2       -0.54884    0.54393  -1.009  0.31296    
+AgeF3       -0.25735    0.40558  -0.635  0.52574    
+LrnSL        0.38919    0.48421   0.804  0.42153    
+EthN:SexM    0.36240    0.29430   1.231  0.21818    
+EthN:AgeF1  -0.70000    0.43646  -1.604  0.10876    
+EthN:AgeF2  -1.23283    0.42962  -2.870  0.00411 ** 
+EthN:AgeF3   0.04721    0.44883   0.105  0.91622    
+EthN:LrnSL   0.06847    0.34040   0.201  0.84059    
+SexM:AgeF1   0.02257    0.47360   0.048  0.96198    
+SexM:AgeF2   1.55330    0.51325   3.026  0.00247 ** 
+SexM:AgeF3   1.25227    0.45539   2.750  0.00596 ** 
+SexM:LrnSL   0.07187    0.40805   0.176  0.86019    
+AgeF1:LrnSL -0.43101    0.47948  -0.899  0.36870    
+AgeF2:LrnSL  0.52074    0.48567   1.072  0.28363    
+AgeF3:LrnSL       NA         NA      NA       NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(1.6036) family taken to be 1)
+
+    Null deviance: 235.23  on 145  degrees of freedom
+Residual deviance: 167.53  on 128  degrees of freedom
+AIC: 1100.5
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  1.604 
+          Std. Err.:  0.214 
+
+ 2 x log-likelihood:  -1062.546 </code></pre>
+</div>
+</div>
+</section>
+<section id="sec-summary" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="sec-summary"><span class="header-section-number">4</span> Summary and discussion</h2>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>As usual…</p>
+</div>
+</div>
+</div>
+</section>
+<section id="computational-details" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="computational-details">Computational details</h2>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>If necessary or useful, information about certain computational details such as version numbers, operating systems, or compilers could be included in an unnumbered section. Also, auxiliary packages (say, for visualizations, maps, tables, …) that are not cited in the main text can be credited here.</p>
+</div>
+</div>
+</div>
+<p>The results in this paper were obtained using <code>R</code>~3.4.1 with the <code>MASS</code>~7.3.47 package. <code>R</code> itself and all packages used are available from the Comprehensive <code>R</code> Archive Network (CRAN) at [https://CRAN.R-project.org/].</p>
+</section>
+<section id="acknowledgments" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>All acknowledgments (note the AE spelling) should be collected in this unnumbered section before the references. It may contain the usual information about funding and feedback from colleagues/reviewers/etc. Furthermore, information such as relative contributions of the authors may be added here (if any).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-CameronTrivedi2013" class="csl-entry" role="doc-biblioentry">
+Cameron, A. Colin, and Pravin K. Trivedi. 2013. <em>Regression Analysis of Count Data</em>. 2nd ed. Cambridge: Cambridge University Press.
+</div>
+<div id="ref-ChambersHastie1992" class="csl-entry" role="doc-biblioentry">
+Chambers, John M., and Trevor J. Hastie, eds. 1992. <em>Statistical Models in </em>. London: Chapman &amp; Hall.
+</div>
+<div id="ref-R" class="csl-entry" role="doc-biblioentry">
+Core Team. 2017. <em>: <span>A</span> Language and Environment for Statistical Computing</em>. Vienna, Austria: Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-Jackman2015" class="csl-entry" role="doc-biblioentry">
+Jackman, Simon. 2015. <em>: Classes and Methods for Developed in the Political Science Computational Laboratory, Stanford University</em>. <a href="https://CRAN.R-project.org/package=pscl">https://CRAN.R-project.org/package=pscl</a>.
+</div>
+<div id="ref-McCullaghNelder1989" class="csl-entry" role="doc-biblioentry">
+McCullagh, Peter, and John A. Nelder. 1989. <em>Generalized Linear Models</em>. 2nd ed. London: Chapman &amp; Hall. <a href="https://doi.org/10.1007/978-1-4899-3242-6">https://doi.org/10.1007/978-1-4899-3242-6</a>.
+</div>
+<div id="ref-Mullahy1986" class="csl-entry" role="doc-biblioentry">
+Mullahy, John. 1986. <span>“Specification and Testing of Some Modified Count Data Models.”</span> <em>Journal of Econometrics</em> 33 (3): 341–65. <a href="https://doi.org/10.1016/0304-4076(86)90002-3">https://doi.org/10.1016/0304-4076(86)90002-3</a>.
+</div>
+<div id="ref-StasinopoulosRigby2007" class="csl-entry" role="doc-biblioentry">
+Stasinopoulos, D. Mikis, and Robert A. Rigby. 2007. <span>“Generalized Additive Models for Location Scale and Shape (<span>GAMLSS</span>) in .”</span> <em>Journal of Statistical Software</em> 23 (7): 1–46. <a href="https://doi.org/10.18637/jss.v023.i07">https://doi.org/10.18637/jss.v023.i07</a>.
+</div>
+<div id="ref-VenablesRipley2002" class="csl-entry" role="doc-biblioentry">
+Venables, William N., and Brian D. Ripley. 2002. <em>Modern Applied Statistics with </em>. 4th ed. New York: Springer-Verlag. <a href="https://doi.org/10.1007/978-0-387-21706-2">https://doi.org/10.1007/978-0-387-21706-2</a>.
+</div>
+<div id="ref-Wood2006" class="csl-entry" role="doc-biblioentry">
+Wood, Simon N. 2006. <em>Generalized Additive Models: An Introduction with </em>. Boca Raton: Chapman &amp; Hall/CRC.
+</div>
+<div id="ref-Yee2009" class="csl-entry" role="doc-biblioentry">
+Yee, Thomas W. 2010. <span>“The Package for Categorical Data Analysis.”</span> <em>Journal of Statistical Software</em> 32 (10): 1–34. <a href="https://doi.org/10.18637/jss.v032.i10">https://doi.org/10.18637/jss.v032.i10</a>.
+</div>
+<div id="ref-ZeileisKleiberJackman2008" class="csl-entry" role="doc-biblioentry">
+Zeileis, Achim, Christian Kleiber, and Simon Jackman. 2008. <span>“Regression Models for Count Data in .”</span> <em>Journal of Statistical Software</em> 27 (8): 1–25. <a href="https://doi.org/10.18637/jss.v027.i08">https://doi.org/10.18637/jss.v027.i08</a>.
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="sec-techdetails" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-techdetails">More technical details</h2>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Appendices can be included after the bibliography (with a page break). Each section within the appendix should have a proper section title (rather than just <em>Appendix</em>).</p>
+<p>For more technical style details, please check out JSS’s style FAQ at [https://www.jstatsoft.org/pages/view/style#frequently-asked-questions] which includes the following topics:</p>
+<ul>
+<li>Title vs.&nbsp;sentence case.</li>
+<li>Graphics formatting.</li>
+<li>Naming conventions.</li>
+<li>Turning JSS manuscripts into <code>R</code> package vignettes.</li>
+<li>Trouble shooting.</li>
+<li>Many other potentially helpful details…</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-bibtex" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-bibtex">Using BibTeX</h2>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>References need to be provided in a <span style="font-variant: small-caps;">Bib</span><span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X file (<code>.bib</code>). All references should be made with <code>@cite</code> syntax. This commands yield different formats of author-year citations and allow to include additional details (e.g.,pages, chapters, ) in brackets. In case you are not familiar with these commands see the JSS style FAQ for details.</p>
+<p>Cleaning up <span style="font-variant: small-caps;">Bib</span><span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X files is a somewhat tedious task – especially when acquiring the entries automatically from mixed online sources. However, it is important that informations are complete and presented in a consistent style to avoid confusions. JSS requires the following format.</p>
+<ul>
+<li>item JSS-specific markup (<code>\proglang</code>, <code>\pkg</code>, <code>\code</code>) should be used in the references.</li>
+<li>item Titles should be in title case.</li>
+<li>item Journal titles should not be abbreviated and in title case.</li>
+<li>item DOIs should be included where available.</li>
+<li>item Software should be properly cited as well. For <code>R</code> packages <code>citation("pkgname")</code> typically provides a good starting point.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
