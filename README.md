@@ -1,4 +1,4 @@
-# jss
+# Journal of Statistical Software (JSS)
 
 This Quarto format will help you create documents for the Journal of Statistical Software. To learn more about the Journal of Statistical Software, see [https://www.jstatsoft.org](https://www.jstatsoft.org). For more about Quarto and how to use format extensions, see <https://quarto.org/docs/journals/>.
 
