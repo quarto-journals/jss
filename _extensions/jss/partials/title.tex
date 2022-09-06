@@ -2,7 +2,7 @@
 
 %% Author information
 \author{$for(by-author)$$_print-author.tex()$$endfor$}
-\Plainauthor{$for(by-author)$$it.name.literal$$endfor$} %% comma-separated
+\Plainauthor{$for(by-author)$$it.name.literal$$sep$, $endfor$} %% comma-separated
 
 \title{$title$}
 $if(title-plain)$
@@ -19,10 +19,10 @@ $endif$
 
 %% at least one keyword must be supplied
 $if(keywords-formatted)$
-\Keywords{$for(keywords-formatted/first)$$it$$endfor$$for(keywords-formatted/rest)$, $it$$endfor$}
+\Keywords{$for(keywords-formatted)$$it$$sep$, $endfor$}
 $endif$
 $if(keywords)$
-\Plainkeywords{$for(keywords/first)$$it$$endfor$$for(keywords/rest)$, $it$$endfor$}
+\Plainkeywords{$for(keywords)$$it$$sep$, $endfor$}
 $endif$
 
 %% publication information
