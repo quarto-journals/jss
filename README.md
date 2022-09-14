@@ -34,3 +34,57 @@ format:
 
 You can view a preview of the rendered template at <https://quarto-journals.github.io/jss/>. 
 
+## Format Options
+
+The JSS format supports a number of options for customizing the format and appearance of the document. Specify these under the `journal` key.
+
+---
+
+**`type`**
+
+`article` - default, for JSS article.
+
+`codesnippets` - for JSS code snippets.
+
+`bookreview` - for JSS book reviews.
+
+`softwarereview` - for JSS software reviews.
+
+---
+
+**`cite-shortnames`**
+
+Set to `true` to disable citations with all names globally.
+
+--
+
+**`suppress`**
+
+List of:
+
+`title` - suppress the automatic `\maketitle` at the beginning of the document.
+
+`headings` - suppress headings on the pages.
+
+`footer` - suppress the automatic `\makefooter` at the end of the document.
+
+--
+
+**`include-jss-default`**
+
+Set to `false` to suppress JSS header and footer.
+
+--
+
+For example:
+
+```yaml
+format:
+  jss-pdf:
+    keep-tex: true
+    journal:
+      type: bookreview
+      cite-shortnames: true
+      suppress: [title]
+      include-jss-default: false
+```

@@ -5,7 +5,7 @@ contributes:
   format:
     common:
       filters:
-        - filter.lua
+        - jss.lua
       shortcodes:
         - quarto-ext/fancy-text
       knitr:
@@ -14,6 +14,7 @@ contributes:
             prompt: "R> "
             continue: "+"
     pdf:
+      documentclass: jss
       shift-heading-level-by: -1
       tbl-cap-location: bottom
       highlight-style: none
@@ -26,7 +27,6 @@ contributes:
       fig-width: 4.9 # 6.125" * 0.8, as in template
       fig-height: 3.675 # 4.9 * 3:4
       template-partials:
-        - "partials/doc-class.tex"
         - "partials/title.tex"
         - "partials/before-body.tex"
         - "partials/_print-address.tex"

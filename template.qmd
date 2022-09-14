@@ -2,7 +2,7 @@
 title: "A Short Demo Article: Regression Models for Count Data in R"
 format:
     jss-pdf:
-        keep-tex: true  
+        keep-tex: true
     jss-html: default
 author:
   - name: Achim Zeileis
