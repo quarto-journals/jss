@@ -56,7 +56,7 @@ The JSS format supports a number of options for customizing the format and appea
 
 Set to `true` to disable citations with all names globally.
 
---
+---
 
 **`suppress`**
 
@@ -68,13 +68,13 @@ List of:
 
 `footer` - suppress the automatic `\makefooter` at the end of the document.
 
---
+---
 
 **`include-jss-default`**
 
 Set to `false` to suppress JSS header and footer.
 
---
+---
 
 For example:
 
