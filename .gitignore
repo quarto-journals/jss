@@ -1,1 +1,11 @@
 .DS_Store
+
+/.luarc.json
+
+/template_files/
+/template.html
+/template.pdf
+/template.tex
+/jss.bst
+/jss.cls
+/jsslogo.jpg

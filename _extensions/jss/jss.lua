@@ -37,7 +37,7 @@ return {
       
       for i, mapping in ipairs(texMappings) do
         if #el.attr.classes == 1 and el.attr.classes:includes(mapping) then
-          if quarto.doc.isFormat("pdf") then
+          if quarto.doc.is_format("pdf") then
             return pandoc.RawInline("tex", "\\" .. mapping .. "{" .. contentStr .. "}" )
           else 
             return pandoc.Code(contentStr);
@@ -46,7 +46,7 @@ return {
       end
     end,  
     Meta = function(meta)            
-      if quarto.doc.isFormat("pdf") then
+      if quarto.doc.is_format("pdf") then
         -- Authors output in the template uses a special separator
         -- to join authors (including wrapping to a new line)
         -- this computes the proper prefix and places it in the author metadata
