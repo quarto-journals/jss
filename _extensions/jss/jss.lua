@@ -111,6 +111,11 @@ return {
         if jss == false then
           setClassOption(meta, 'nojss')
         end
+
+        -- make sure there is a plain title
+        if meta['title'] ~= nil and meta['title-plain'] == nil then
+          meta['title-plain'] = pandoc.utils.stringify(meta['title'])
+        end
       end
       
       return meta
