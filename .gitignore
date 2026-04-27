@@ -6,6 +6,11 @@
 /template.html
 /template.pdf
 /template.tex
+/template.aux
+/template.bbl
+/template.blg
+/template.log
+/template.out
 /jss.bst
 /jss.cls
 /jsslogo.jpg
