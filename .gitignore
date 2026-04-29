@@ -14,3 +14,20 @@
 /jss.bst
 /jss.cls
 /jsslogo.jpg
+
+# Test fixture build artifacts (only document.qmd is checked in)
+/tests/fixtures/*/document.tex
+/tests/fixtures/*/document.pdf
+/tests/fixtures/*/document.aux
+/tests/fixtures/*/document.bbl
+/tests/fixtures/*/document.blg
+/tests/fixtures/*/document.log
+/tests/fixtures/*/document.out
+/tests/fixtures/*/document_files/
+# format-resources Quarto stages alongside the document at render time
+/tests/fixtures/*/jss.cls
+/tests/fixtures/*/jss.bst
+/tests/fixtures/*/jsslogo.jpg
+
+/.quarto/
+**/*.quarto_ipynb

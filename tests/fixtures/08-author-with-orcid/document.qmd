@@ -1,0 +1,15 @@
+---
+title: ORCID rendering in the \author block (sanity check on _print-author.tex)
+format:
+  jss-pdf:
+    keep-tex: true
+author:
+  - name: Orcid Author
+    orcid: 0000-0000-0000-0001
+    email: orcid@example.com
+    affiliations:
+      - name: ORCID University
+keywords: [test]
+---
+
+Test body paragraph.

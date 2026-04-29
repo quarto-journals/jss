@@ -1,0 +1,20 @@
+---
+title: Two authors, each with their own affiliations
+format:
+  jss-pdf:
+    keep-tex: true
+author:
+  - name: Alice Researcher
+    email: alice@acme.edu
+    affiliations:
+      - name: ACME University
+        city: Springfield
+        country: USA
+  - name: Bob Builder
+    email: bob@buildlab.edu
+    affiliations:
+      - Builder Lab
+keywords: [test]
+---
+
+Test body paragraph.

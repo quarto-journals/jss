@@ -1,0 +1,17 @@
+---
+title: postal-code rendering regression
+format:
+  jss-pdf:
+    keep-tex: true
+author:
+  - name: Postal Author
+    email: postal@example.com
+    affiliations:
+      - name: Some Institute
+        city: Innsbruck
+        country: Austria
+        postal-code: "6020"
+keywords: [test]
+---
+
+Test body paragraph.
