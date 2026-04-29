@@ -1,0 +1,13 @@
+---
+title: Author with no affiliations key
+format:
+  jss-pdf:
+    keep-tex: true
+author:
+  - name: Independent Author
+    email: indep@example.com
+    url: https://indep.example
+keywords: [test]
+---
+
+Test body paragraph.

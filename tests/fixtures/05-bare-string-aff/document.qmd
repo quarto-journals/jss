@@ -1,0 +1,14 @@
+---
+title: Author with a single bare-string affiliation
+format:
+  jss-pdf:
+    keep-tex: true
+author:
+  - name: Some Author
+    email: some@example.com
+    affiliations:
+      - Just A Name Institute
+keywords: [test]
+---
+
+Test body paragraph.

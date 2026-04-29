@@ -1,0 +1,23 @@
+---
+title: Single author, single structured affiliation
+format:
+  jss-pdf:
+    keep-tex: true
+author:
+  - name: Alice Researcher
+    orcid: 0000-0000-0000-0001
+    email: alice@acme.edu
+    url: https://alice.example
+    affiliations:
+      - name: ACME University
+        department: Department of Foo
+        group: Foo Research Group
+        address: 123 Main Street
+        city: Springfield
+        region: IL
+        country: USA
+        postal-code: "62701"
+keywords: [test]
+---
+
+Test body paragraph.

@@ -1,0 +1,17 @@
+---
+title: state alias regression - state input must render via region
+format:
+  jss-pdf:
+    keep-tex: true
+author:
+  - name: California Author
+    email: ca@example.com
+    affiliations:
+      - name: Stanford University
+        city: Stanford
+        state: CA
+        country: USA
+keywords: [test]
+---
+
+Test body paragraph.
