@@ -25,14 +25,6 @@ contributes:
 
           \newcommand{\class}[1]{`\code{#1}'}
           \newcommand{\fct}[1]{\code{#1()}}
-
-          % Workaround for hyperref 7.01q bug with natbib + cite in \maketitle abstract.
-          % Without this, citations inside \Abstract{} fail with "Undefined control sequence
-          % \@citeb" because \maketitle runs at \begin{document} (before natbib's loop sets
-          % \@citeb). Fix is in hyperref develop; see https://github.com/latex3/hyperref/issues/416
-          \makeatletter
-          \def\hyper@natlinkbreak#1#2{#1}
-          \makeatother
       fig-width: 4.9 # 6.125" * 0.8, as in template
       fig-height: 3.675 # 4.9 * 3:4
       template-partials:
